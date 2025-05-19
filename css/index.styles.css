@@ -1,3 +1,19 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
 .search-box {
     width: 80%;
     padding: 10px;
@@ -22,4 +38,47 @@
 
 .search-btn:hover {
     background-color: #e8491d;
+}
+
+.my-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.my-table th, .my-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.my-table th {
+    background-color: #35424a;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.my-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.my-table tr {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.my-table tr:hover {
+    background-color: #e8491d;
+    color: #fff;
+}
+
+footer {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 10px;
+    background-color: #35424a;
+    color: #ffffff;
+    width: 100%;
+    position: relative;
+    bottom: 0;
 }
