@@ -4,45 +4,31 @@ fetch('js/full_table_data.json')
     .then(response => response.json())
     .then(data => {
         records = data.records.filter(item => item.title);
-        // Не показуємо таблицю одразу
+        // Не показуємо картки одразу
     });
 
-function renderTable(data) {
+function renderCards(data) {
     const container = document.getElementById('table-container');
     container.innerHTML = '';
-    if (data.length === 0) return; // Не показуємо таблицю, якщо немає результатів
+    if (data.length === 0) return;
 
-    const table = document.createElement('table');
-    table.className = 'my-table';
-    table.style.width = "100%";
-    table.border = "1";
-    table.style.borderCollapse = "collapse";
+    const cardsContainer = document.createElement('div');
+    cardsContainer.className = 'cards-container';
 
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    ['Номер', 'Назва', 'Відділ', 'Регіон'].forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
     data.forEach(item => {
-        const row = document.createElement('tr');
-        ['id', 'title', 'department', 'region'].forEach(key => {
-            const td = document.createElement('td');
-            td.textContent = item[key] || '';
-            row.appendChild(td);
-        });
-        tbody.appendChild(row);
+        const card = document.createElement('div');
+        card.className = 'work-card';
+        card.innerHTML = `
+            <div class="work-id">${item.id || ''}</div>
+            <div class="work-title">${item.title || ''}</div>
+            <div class="work-department"><b>Відділ:</b> ${item.department || ''}</div>
+            <div class="work-region"><b>Регіон:</b> ${item.region || ''}</div>
+            <button class="results-btn">Результати</button>
+        `;
+        cardsContainer.appendChild(card);
     });
-    table.appendChild(tbody);
-    container.appendChild(table);
 
-    // Явно показуємо таблицю
-    table.style.display = 'table';
+    container.appendChild(cardsContainer);
 }
 
 function filterRecords(query) {
@@ -54,14 +40,14 @@ function filterRecords(query) {
     );
 }
 
-// При натисканні кнопки показуємо таблицю з результатами
+// При натисканні кнопки показуємо картки з результатами
 document.getElementById('search-btn').addEventListener('click', function () {
     const query = document.getElementById('search').value;
     const filtered = filterRecords(query);
-    renderTable(filtered);
+    renderCards(filtered);
 });
 
-// При вводі не показуємо таблицю
+// При вводі не показуємо картки
 document.getElementById('search').addEventListener('input', function () {
     document.getElementById('table-container').innerHTML = '';
 });

@@ -40,37 +40,7 @@ body {
     background-color: #e8491d;
 }
 
-.my-table {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
 
-.my-table th, .my-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.my-table th {
-    background-color: #35424a;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.my-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.my-table tr {
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.my-table tr:hover {
-    background-color: #e8491d;
-    color: #fff;
-}
 
 footer {
     flex-shrink: 0;
@@ -82,3 +52,106 @@ footer {
     position: relative;
     bottom: 0;
 }
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+    margin: 40px auto 30px auto;
+    max-width: 1300px;
+}
+
+.work-card {
+    background: linear-gradient(135deg, #f8fafc 70%, #e3e9f3 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(52,66,74,0.10), 0 1.5px 4px rgba(52,66,74,0.06);
+    padding: 28px 24px 22px 24px;
+    width: 320px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: box-shadow 0.25s, background 0.25s, transform 0.18s;
+    border: 1.5px solid #e0e7ef;
+    position: relative;
+    overflow: hidden;
+}
+
+.work-card:hover {
+    box-shadow: 0 8px 32px rgba(52,66,74,0.18), 0 2px 8px rgba(52,66,74,0.10);
+    background: linear-gradient(135deg, #e3e9f3 60%, #f8fafc 100%);
+    transform: translateY(-4px) scale(1.025);
+}
+
+.work-id {
+    font-weight: bold;
+    color: #e8491d;
+    margin-bottom: 12px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.work-title {
+    font-size: 19px;
+    color: #222;
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.work-department,
+.work-region {
+    font-size: 15px;
+    color: #35424a;
+    margin-bottom: 4px;
+    opacity: 0.85;
+}
+
+.work-department b,
+.work-region b {
+    color: #e8491d;
+    font-weight: 500;
+}
+
+.sort-controls {
+    display: flex;
+    gap: 10px;
+    margin: 30px 0 0 30px;
+}
+
+.sort-controls button {
+    padding: 8px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #35424a;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.sort-controls button:hover {
+    background: #e8491d;
+}
+
+.results-btn {
+    margin-top: 16px;
+    padding: 10px 18px;
+    background: #e8491d;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s;
+}
+
+.results-btn:hover {
+    background: #35424a;
+}
+
+/* При бажанні видаліть або закоментуйте стилі .my-table, якщо таблиці більше не використовуються */
