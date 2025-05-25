@@ -4,7 +4,7 @@ fetch('js/full_table_data.json')
     .then(response => response.json())
     .then(data => {
         records = data.records.filter(item => item.title);
-        // Не показуємо картки одразу
+        renderCards(records); // Показати всі роботи одразу
     });
 
 function renderCards(data) {
@@ -43,11 +43,13 @@ function filterRecords(query) {
 // При натисканні кнопки показуємо картки з результатами
 document.getElementById('search-btn').addEventListener('click', function () {
     const query = document.getElementById('search').value;
-    const filtered = filterRecords(query);
-    renderCards(filtered);
+    if (query === '') {
+        renderCards(records); // Якщо поле порожнє — показати всі
+    } else {
+        const filtered = filterRecords(query);
+        renderCards(filtered);
+    }
 });
 
-// При вводі не показуємо картки
-document.getElementById('search').addEventListener('input', function () {
-    document.getElementById('table-container').innerHTML = '';
-});
+// При вводі не ховаємо картки, нічого не робимо
+// Якщо хочете очищати — раніше було: document.getElementById('table-container').innerHTML = '';
