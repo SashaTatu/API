@@ -28,11 +28,15 @@ function renderCards(data) {
             <div class="work-region"><b>Регіон:</b> ${item["область"] || ''}</div>
             <button class="results-btn">Результати</button>
         `;
-        // Додаємо обробник для відкриття модального вікна з постером
+        // Модалка з постером при кліку на картку
         card.addEventListener('click', function (e) {
-            // Не відкривати модалку при натисканні на кнопку
             if (e.target.classList.contains('results-btn')) return;
             showPosterModal(item["постер"]);
+        });
+        // Модалка з результатами при кліку на кнопку
+        card.querySelector('.results-btn').addEventListener('click', function (e) {
+            e.stopPropagation();
+            showResultsModal(item["автор"], item["секція"]);
         });
         cardsContainer.appendChild(card);
     });
@@ -77,6 +81,127 @@ function showPosterModal(posterUrl) {
 
     closeBtn.onclick = () => modal.remove();
     modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+}
+
+// Додаємо функцію для модального вікна з результатами
+function showResultsModal(author, section) {
+    fetch('js/math.json')
+        .then(response => response.json())
+        .then(resultsData => {
+            // Збираємо всі роботи з усіх секцій у плоский масив
+            let allWorks = [];
+            for (const stageKey in resultsData) {
+                const stage = resultsData[stageKey];
+                for (const departmentKey in stage) {
+                    const department = stage[departmentKey];
+                    for (const sectionKey in department) {
+                        const works = department[sectionKey];
+                        works.forEach(work => {
+                            allWorks.push({
+                                ...work,
+                                _section: sectionKey // додаємо секцію для пошуку
+                            });
+                        });
+                    }
+                }
+            }
+
+            // Пошук за автором і секцією (враховуємо повний збіг секції)
+            const found = allWorks.find(res =>
+                res["Прізвище, ім’я, по батькові"] === author &&
+                res._section.toLowerCase().includes(section.trim().toLowerCase())
+            );
+
+            let content = '';
+            if (found) {
+                content = `
+                    <div class="results-title">Результати учасника</div>
+
+                    <div class="results-info">
+                        <div class="results-block">
+                            <span class="label">Автор:</span><br>
+                            <span class="value name">${found["Прізвище, ім’я, по батькові"]}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Секція:</span><br>
+                            <span class="value">${found._section}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Область:</span><br>
+                            <span class="value">${found["Область"] || '—'}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Клас:</span><br>
+                            <span class="value">${found["Клас"] || '—'}</span>
+                        </div>
+                    </div>
+
+                    <hr class="results-divider">
+
+                    <div class="results-scores">
+                        <div class="results-block">
+                            <span class="label">Заочне оцінювання:</span><br>
+                            <span class="value score">${found["Заочне оцінювання"] || '—'}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Постерний захист:</span><br>
+                            <span class="value score">${found["Постерний захист"] || '—'}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Наукова конференція:</span><br>
+                            <span class="value score">${found["Наукова конференція"] || '—'}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Загальна сума балів:</span><br>
+                            <span class="value score">${found["Загальна сума балів"] || '—'}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Рейтинг:</span><br>
+                            <span class="value score">${found["Рейтинг"] || '—'}</span>
+                        </div>
+                        <div class="results-block">
+                            <span class="label">Місце:</span><br>
+                            <span class="value place">${found["Місце"] || '—'}</span>
+                        </div>
+                    </div>
+
+                `;
+            } else {
+                content = `<div style="font-size:20px;text-align:center;padding:30px 0;">Результати не знайдено.</div>`;
+            }
+
+            let oldModal = document.getElementById('results-modal');
+            if (oldModal) oldModal.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'results-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100vw';
+            modal.style.height = '100vh';
+            modal.style.background = 'rgba(0,0,0,0.7)';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.zIndex = '10000';
+
+            modal.innerHTML = `
+                <div style="background:#fff;padding:36px 32px 28px 32px;border-radius:20px;min-width:320px;max-width:95vw;box-shadow:0 8px 40px rgba(0,0,0,0.18);position:relative;animation:fadeIn .25s;">
+                    <button id="close-results-btn" style="position:absolute;top:-18px;right:-18px;background:#e8491d;color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:24px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:background 0.2s;">×</button>
+                    ${content}
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            document.getElementById('close-results-btn').onclick = () => modal.remove();
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+        })
+        .catch(err => {
+            alert('Помилка завантаження math.json');
+            console.error(err);
+        });
 }
 
 function filterRecords(query) {

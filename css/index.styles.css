@@ -58,7 +58,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 40px auto 30px auto;
     max-width: 1300px;
 }
@@ -78,6 +78,7 @@ footer {
     border: 1px solid #e0e7ef;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .work-card:hover {
@@ -218,4 +219,60 @@ footer {
     0% { transform: scale(0.92); }
     80% { transform: scale(1.04);}
     100% { transform: scale(1);}
+}
+
+.results-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e8491d;
+    margin-bottom: 22px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.results-info,
+.results-scores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 32px;
+    justify-content: center;
+    text-align: left;
+}
+
+.results-block {
+    min-width: 140px;
+    max-width: 220px;
+}
+
+.label {
+    color: #888;
+    font-size: 14px;
+}
+
+.value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #222;
+}
+
+.value.name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.value.score {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.value.place {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e8491d;
+}
+
+.results-divider {
+    margin: 20px 0 16px 0;
+    border: 0;
+    border-top: 1px solid #eee;
 }
