@@ -12,6 +12,11 @@ body {
 
 .container {
     flex: 1 0 auto;
+    max-width: 1300px;
+    gap: 24px;
+    justify-content: space-around;
+    margin: 40px auto 30px auto;
+    max-width: 1300px;
 }
 
 .search-box {
@@ -40,6 +45,39 @@ body {
     background-color: #e8491d;
 }
 
+.search-selects {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 24px 0 16px;
+}
+
+.search-selects select {
+    padding: 10px 16px;
+    font-size: 16px;
+    min-width: 160px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #333;
+    border: 1.5px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+    outline: none;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+}
+
+.search-selects select:hover {
+    border-color: #f97316;
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.15);
+}
+
+.search-selects select:focus {
+    border-color: #f97316;
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
+}
+
 
 
 footer {
@@ -65,44 +103,42 @@ footer {
 
 /* Сама картка */
 .work-card {
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-    padding: 28px 24px 22px 24px;
-    width: 320px;
-    min-height: 140px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px #e8491d18;
+    padding: 22px 18px 18px 18px;
+    margin: 12px;
+    min-width: 260px;
+    max-width: 340px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    transition: box-shadow 0.25s, background 0.25s, transform 0.2s;
-    border: 1px solid #e0e7ef;
+    gap: 8px;
+    transition: box-shadow 0.2s, transform 0.2s;
     position: relative;
-    overflow: hidden;
-    cursor: pointer;
 }
 
 .work-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-    transform: translateY(-5px);
+    box-shadow: 0 6px 32px #e8491d33;
+    transform: translateY(-3px) scale(1.02);
 }
 
 /* ID */
 .work-id {
-    font-weight: bold;
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.1em;
     color: #e8491d;
-    margin-bottom: 12px;
-    font-size: 22px;
-    letter-spacing: 1px;
+    font-weight: 700;
+    opacity: 0.7;
 }
 
 /* Назва роботи */
 .work-title {
-    font-size: 20px;
-    color: #1a1a1a;
-    margin-bottom: 14px;
+    font-size: 1.18em;
     font-weight: 700;
-    line-height: 1.45;
-    word-break: break-word;
+    margin-bottom: 2px;
+    color: #222;
 }
 
 /* Автор */
@@ -146,24 +182,20 @@ footer {
 
 /* Кнопка "Результати" */
 .results-btn {
-    margin-top: 16px;
-    padding: 10px 18px;
-    background: linear-gradient(90deg, #e8491d, #f97316);
+    margin-top: 10px;
+    padding: 8px 0;
+    background: #e8491d;
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 1em;
+    font-weight: 600;
     cursor: pointer;
-    align-self: flex-start;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(232, 73, 29, 0.3);
+    transition: background 0.18s;
 }
 
 .results-btn:hover {
-    background: #35424a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(53, 66, 74, 0.3);
+    background: #f97316;
 }
 
 /* Кнопки сортування */
@@ -275,4 +307,17 @@ footer {
     margin: 20px 0 16px 0;
     border: 0;
     border-top: 1px solid #eee;
+}
+
+h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #e8491d;
+    text-align: center;
+    margin-top: 38px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 12px #f9731622, 0 1px 0 #fff;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    line-height: 1.1;
 }

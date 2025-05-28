@@ -8,11 +8,30 @@
 </head>
 <body>
     <header>
-        <h1>Ласкаво просимо</h1>
+        <h1>МАН 2025</h1>
     </header>
     <div class="container">
-        <input type="text" id="search" placeholder="Пошук..." class="search-box">
-        <button id="search-btn" class="search-btn">Шукати</button>
+        <!-- Замість старого пошуку -->
+        <div class="search-selects">
+            <select id="author-select">
+                <option value="">Виберіть автора</option>
+            </select>
+            <select id="department-select">
+                <option value="">Виберіть відділ</option>
+            </select>
+            <select id="section-select">
+                <option value="">Виберіть секцію</option>
+            </select>
+            <select id="region-select">
+                <option value="">Виберіть область</option>
+            </select>
+            <select id="place-select">
+                <option value="">Виберіть місце</option>
+                <option value="І">І</option>
+                <option value="ІІ">ІІ</option>
+                <option value="ІІІ">ІІІ</option>
+            </select>
+        </div>
         <div id="table-container"></div> <!-- Додайте цей контейнер -->
     </div>
     <footer>
